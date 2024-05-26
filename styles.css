@@ -1,11 +1,103 @@
-
 .anton-regular {
     font-family: "Anton", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
+.popup .overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    display:none;
+}
 
+.popup .content {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background: #fff;
+    width: 450px;
+    height: 220px;
+    z-index:2;
+    text-align: center;
+    padding:20px;
+    box-sizing: border-box;
+}
+
+.popup .close-btn {
+    cursor:pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+/* Add the new CSS rules here */
+#instructionsPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-family: "Anton", sans-serif;
+}
+
+#instructionsPopup .popup-content {
+    background-color: blue;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%; /* Increase the width */
+    max-width: 800px; /* Increase the max-width */
+    position: relative; /* Add this to position the close button */
+}
+
+#instructionsPopup #closeInstructions {
+    cursor: pointer;
+    position: absolute; /* Position the button absolutely */
+    top: 10px; /* Position from the top */
+    right: 10px; /* Position from the right */
+    background: none; /* Remove the default button background */
+    border: none; /* Remove the default button border */
+    font-size: 2em; /* Increase the size of the "X" */
+    color: white; /* Change the color of the "X" */
+}
+.current-team-container {
+    position: fixed; /* Make the position fixed */
+    top: 10px; /* Position from the top */
+    right: 10px; /* Position from the right */
+    display: flex; /* Use Flexbox */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Add gap between items */
+}
+
+.current-team-display {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(26, 26, 255); /* Blue background */
+    color: rgb(255, 255, 255); /* White text */
+    box-sizing: border-box;
+    width: fit-content;
+}
+#scores div {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(26, 26, 255);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
 body {
     margin: 0;
     padding: 0;
@@ -44,13 +136,6 @@ body {
 
 
 
-.first-button {
-    background-color: rgb(24, 171, 24);
-}
-
-.second-button {
-    background-color: rgb(190, 57, 37);
-}
 
 .genre-title {
     background-color: rgb(26, 26, 255);
@@ -58,6 +143,32 @@ body {
     font-size: 28px;
     padding: 5px;
     margin: 5px;
+}
+
+.answer-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid rgb(11, 11, 91);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: rgb(46, 46, 46);
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(26, 26, 255);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: rgb(1, 61, 200);
 }
 
 .correct-answer {

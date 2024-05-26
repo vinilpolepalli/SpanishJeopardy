@@ -14,7 +14,7 @@ const jeapordyCategories = [
             {
                 question: "Who made the album Scorpion",
                 answers: ["Kanye West", "Drake"],
-                correct: "Drake",
+                correct: "drake",
                 level: "mid"
             },
             {
@@ -179,9 +179,40 @@ const jeapordyCategories = [
     },
 ]
 
-let score = 0;
+let currentTeam = 1;
+let scores = [0, 0, 0, 0, 0];
 
+function updateScore(points) {
+    scores[currentTeam - 1] += points;
+    document.getElementById(`score${currentTeam}`).textContent = scores[currentTeam - 1];
 
+    // Move to the next team
+    currentTeam = currentTeam % 5 + 1;
+
+    // Update the current team display
+    const currentTeamDisplay = document.getElementById('current-team-display');
+    if (currentTeamDisplay) {
+        currentTeamDisplay.textContent = `Current team: Team ${currentTeam}`;
+    }
+}
+
+// Existing JavaScript code here...
+
+const instructionsPopup = document.getElementById('instructionsPopup');
+const closeInstructions = document.getElementById('closeInstructions');
+
+function showInstructions() {
+    instructionsPopup.style.display = 'flex';
+}
+
+function hideInstructions() {
+    instructionsPopup.style.display = 'none';
+}
+
+closeInstructions.addEventListener('click', hideInstructions);
+
+// Call this function when you want to show the instructions
+showInstructions();
 
 
 
@@ -242,19 +273,18 @@ function flipCard()
     const textDisplay = document.createElement('div')
     textDisplay.classList.add('card-text')
     textDisplay.innerHTML = this.getAttribute("data-question")
-    const firstButton = document.createElement('button')
-    const secondButton = document.createElement('button')
+    textDisplay.innerHTML = this.getAttribute("data-question")
 
-    firstButton.classList.add('first-button')
-    secondButton.classList.add('second-button')
+    const answerInput = document.createElement('input')
+    answerInput.setAttribute('type', 'text')
+    answerInput.classList.add('answer-input')
 
-    firstButton.innerHTML = this.getAttribute('data-answer-1')
-    secondButton.innerHTML = this.getAttribute('data-answer-2')
+    const submitButton = document.createElement('button')
+    submitButton.classList.add('submit-button')
+    submitButton.innerHTML = "Submit"
 
-    firstButton.addEventListener('click', (event) => getResult.call(event.target));
-    secondButton.addEventListener('click', (event) => getResult.call(event.target));
-
-    this.append(textDisplay,firstButton,secondButton)
+    submitButton.addEventListener('click', (event) => getResult.call(event.target, answerInput.value));
+    this.append(textDisplay, answerInput, submitButton)
 
 
     const allCards = Array.from(document.querySelectorAll('.card'))
@@ -262,31 +292,44 @@ function flipCard()
 
 }
 
-function getResult() {
+function getResult(userAnswer) {
 
     const allCards = Array.from(document.querySelectorAll('.card'))
     allCards.forEach(card => card.addEventListener('click', flipCard))
     const cardOfButton = this.parentElement
-    if (cardOfButton.getAttribute('data-correct') === this.innerHTML) {
-        score = score + parseInt(cardOfButton.getAttribute('data-value'))
-        scoreDisplay.innerHTML = score
+
+    const thisTeam = currentTeam; // Store the current team
+    if (cardOfButton.getAttribute('data-correct') === userAnswer.toLowerCase()) {
+        const points = parseInt(cardOfButton.getAttribute('data-value')); // Get the points from the card
+        updateScore(points); // Update the score of the current team
+        
         cardOfButton.classList.add('correct-answer')
+        cardOfButton.innerHTML = `+${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
         setTimeout(() => {
             while (cardOfButton.firstChild) {
                 cardOfButton.removeChild(cardOfButton.lastChild)
             }
-            cardOfButton.innerHTML = cardOfButton.getAttribute('data-value')
+            cardOfButton.innerHTML = `+${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
+            
         },100)
+        
     }
     else {
+        
+        const points = -parseInt(cardOfButton.getAttribute('data-value')); // Get the negative points
+        updateScore(points); // Subtract the points from the team's score
         cardOfButton.classList.add('wrong-answer')
+        cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
         setTimeout(() => {
             while (cardOfButton.firstChild)
             {
                 cardOfButton.removeChild(cardOfButton.lastChild)
             }
-            cardOfButton.innerHTML = 0
+            cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Display the points lost and the team
+            
         },100)
+        
     }
     cardOfButton.removeEventListener('click', flipCard)
 }
+

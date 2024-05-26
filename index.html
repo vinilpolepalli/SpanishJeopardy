@@ -10,12 +10,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="current-team-container">
+        <h2>CURRENT TEAM:</h2>
+        <div id="current-team-display" class="current-team-display">Team 1</div>
+    </div>
+
     <h1>LET'S PLAY JEOPARDY</h1>
     <div id="game"></div>
 
+    <div style="margin-top: 50px;"></div>
 
-    <h2>SCORE: <span id="score"></span></h2>
+    
+    
+
+    <h2>SCORES:</h2>
+    <div id="scores">
+        <div>Team 1: <span id="score1">0</span></div>
+        <div>Team 2: <span id="score2">0</span></div>
+        <div>Team 3: <span id="score3">0</span></div>
+        <div>Team 4: <span id="score4">0</span></div>
+        <div>Team 5: <span id="score5">0</span></div>
+    </div>
+    
+
+    <div id="instructionsPopup" class="popup">
+        <div class="popup-content">
+            <h2>Instructions</h2>
+            <p>Here are the instructions for the game...</p>
+            <button id="closeInstructions">&times;</button> <!-- Change "Close" to "&times;" -->
+        </div>
+    </div>
 
     <script src="app.js"></script>
+    
 </body>
 </html>
+
