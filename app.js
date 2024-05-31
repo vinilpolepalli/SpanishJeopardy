@@ -172,6 +172,39 @@ function updateScore(points) {
     }
 }
 
+// Create a popup window
+// Create a popup window
+const teamPopup = document.getElementById('teamPopup');
+teamPopup.style.display = 'none';
+
+// Create 6 buttons, one for each team
+const teamButtons = document.getElementById('teamButtons');
+for (let i = 1; i <= 6; i++) {
+    const teamButton = document.createElement('button');
+    teamButton.textContent = `Team ${i}`;
+    teamButton.addEventListener('click', function() {
+        // Update the current team
+        currentTeam = i;
+
+        // Update the current team display
+        const currentTeamDisplay = document.getElementById('current-team-display');
+        if (currentTeamDisplay) {
+            currentTeamDisplay.textContent = `Team ${currentTeam}`;
+        }
+
+        // Close the popup window
+        teamPopup.style.display = 'none';
+    });
+    teamButtons.appendChild(teamButton);
+}
+
+// Add an event listener to the current team box
+const currentTeamBox = document.getElementById('current-team-display');
+currentTeamBox.addEventListener('click', function() {
+    // Open the popup window
+    teamPopup.style.display = 'block';
+});
+
 // Existing JavaScript code here...
 
 const instructionsPopup = document.getElementById('instructionsPopup');
@@ -192,14 +225,7 @@ showInstructions();
 
 
 
-let doubleJeopardyCard = null;
-
-function assignDoubleJeopardy() {
-    const allCards = Array.from(document.querySelectorAll('.card'));
-    const randomIndex = Math.floor(Math.random() * allCards.length);
-    doubleJeopardyCard = allCards[randomIndex];
-    doubleJeopardyCard.classList.add('double-jeopardy');
-}
+let cards = [];
 
 
 function addCategory(category){
@@ -240,17 +266,25 @@ function addCategory(category){
         card.setAttribute('data-value', card.innerHTML)
 
         card.addEventListener('click', flipCard)
+        cards.push(card);
     })
 
 
 }
+
+
 jeapordyCategories.forEach(category => addCategory(category))
+
+
+function setRandomDoubleJeopardy() {
+    const doubleJeopardyCard = cards[Math.floor(Math.random() * cards.length)];
+    doubleJeopardyCard.setAttribute('data-double-jeopardy', 'true');
+}
+
+setRandomDoubleJeopardy();
 
 function flipCard()
 {
-    if (this === doubleJeopardyCard) {
-        showDoubleJeopardy();
-    }
     this.innerHTML = ""
     this.style.fontSize = "15px"
     this.style.lineHeight = "30px"
@@ -274,25 +308,42 @@ function flipCard()
     const allCards = Array.from(document.querySelectorAll('.card'))
     allCards.forEach(card => card.removeEventListener('click', flipCard))
 
+    if (this.getAttribute('data-double-jeopardy') === 'true') {
+        // Get the double jeopardy popup
+        const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
+
+        // Show the double jeopardy popup
+        doubleJeopardyPopup.style.display = 'block';
+    }
+    
+
 }
 
 
 
+function updateScoreWithoutChangingTurn(points) {
+    scores[currentTeam - 1] += points;
+    document.getElementById(`score${currentTeam}`).textContent = scores[currentTeam - 1];
+}
 
 function getResult(userAnswer) {
-    const isDoubleJeopardy = this.parentElement === doubleJeopardyCard;
     let points = parseInt(this.parentElement.getAttribute('data-value')); // Declare points with let, not const
 
     const allCards = Array.from(document.querySelectorAll('.card'))
-    allCards.forEach(card => card.addEventListener('click', flipCard))
+    allCards.forEach(card => {
+        if (!card.classList.contains('correct-answer') && !card.classList.contains('wrong-answer')) {
+            card.addEventListener('click', flipCard)
+        }
+    })
     const cardOfButton = this.parentElement
 
     const thisTeam = currentTeam; // Store the current team
 
+    const isDoubleJeopardy = this.parentElement.getAttribute('data-double-jeopardy') === 'true';
     if (isDoubleJeopardy) {
-        points *= 2; // Double the points if it's a double jeopardy card
+        points *= 2; // Double the points
     }
-
+    
     if (cardOfButton.getAttribute('data-correct').toLowerCase() === userAnswer.toLowerCase()) {
         updateScore(points); // Update the score of the current team
         
@@ -309,20 +360,58 @@ function getResult(userAnswer) {
     }
     else {
         points = -points; // Get the negative points
-        updateScore(points); // Subtract the points from the team's score
+        updateScore(points); // Subtract the points from the team's score and change the turn
         cardOfButton.classList.add('wrong-answer')
-        cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
-        setTimeout(() => {
-            while (cardOfButton.firstChild)
-            {
-                cardOfButton.removeChild(cardOfButton.lastChild)
-            }
-            cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Display the points lost and the team
-            
-        },100)
+    
+        const correctAnswer = cardOfButton.getAttribute('data-correct');
+        cardOfButton.innerHTML = `${points} for Team ${thisTeam}. \nCorrect answer: ${correctAnswer}`; // Use thisTeam instead of currentTeam
+    
+        // Create override button
         
+
+        const overrideButton = document.createElement('button');
+        overrideButton.textContent = 'Override';
+        overrideButton.classList.add('override-btn'); // Add class to override button
+        overrideButton.addEventListener('click', function() {
+            cardOfButton.classList.remove('wrong-answer');
+            cardOfButton.classList.add('correct-answer');
+            updateScoreWithoutChangingTurn(-points); // Add the points back to the team's score
+            cardOfButton.innerHTML = `+${-points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
+            cardOfButton.removeEventListener('click', flipCard);
+        });
+    
+        // Create continue button
+        const continueButton = document.createElement('button');
+        continueButton.textContent = 'Continue';
+        continueButton.classList.add('continue-btn'); // Add class to continue button
+        continueButton.addEventListener('click', function() {
+            cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Display only the points lost and the team
+            cardOfButton.removeEventListener('click', flipCard);
+        });
+
+        cardOfButton.appendChild(overrideButton);
+        cardOfButton.appendChild(continueButton);
     }
     cardOfButton.removeEventListener('click', flipCard)
 }
 
-assignDoubleJeopardy();
+// Get the close button for the double jeopardy popup
+const closeDoubleJeopardyPopup = document.getElementById('closeDoubleJeopardyPopup');
+
+// Add a click event listener to the close button
+closeDoubleJeopardyPopup.addEventListener('click', function() {
+    // Get the double jeopardy popup
+    const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
+
+    // Hide the double jeopardy popup
+    doubleJeopardyPopup.style.display = 'none';
+});
+if (this.getAttribute('data-double-jeopardy') === 'true') {
+    // Get the double jeopardy popup
+    const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
+
+    console.log(doubleJeopardyPopup); // Add this line
+
+    // Show the double jeopardy popup
+    doubleJeopardyPopup.style.display = 'block';
+}
