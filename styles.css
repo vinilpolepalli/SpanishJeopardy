@@ -109,7 +109,7 @@ body {
     flex-direction: column;
     font-family: "Anton", sans-serif;
     font-weight: 2000;
-    font-style: normal;
+    
 
 }
 
@@ -120,7 +120,7 @@ body {
 }
 
 .card {
-    width: 160px;
+    width: 200;
     height: 120px;
     background-color: rgb(26, 26, 255);
     border-left: solid rgb(19, 19, 160) 10px;

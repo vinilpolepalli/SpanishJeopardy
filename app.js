@@ -3,174 +3,150 @@ const scoreDisplay = document.getElementById('score')
 
 const jeapordyCategories = [
     {
-        genre: "WHO",
+        genre: "SUBJUNCTIVE",
         questions: [
             {
-                question: "Who wrote Harry Potter?",
-                answers: ["JK Rowling", "JRR Tolkien"],
-                correct: "JK Rowling",
+                question: "Arreglar (Que Yo)",
+                correct: "Arregle",
                 level: "easy",
             },
             {
-                question: "Who made the album Scorpion",
-                answers: ["Kanye West", "Drake"],
-                correct: "drake",
+                question: "Ser (Que él)",
+                correct: "Sea",
                 level: "mid"
             },
             {
-                question: "Who developed the first car",
-                answers: ["Karl Benz", "Henry Ford"],
-                correct: "Karl Benz",
+                question: "Es Importante que tú le (decir)",
+                correct: "Digas",
                 level: "medium"
             },
             {
-                question: "Who is the president",
-                answers: ["Obama", "Biden"],
-                correct: "Biden",
+                question: "Creo que tú (comer) muy rápido",
+                correct: "Comes",
                 level: "hard"
             },
             {
-                question: "Who was the first president",
-                answers: ["Lincoln", "Washington"],
-                correct: "Washington",
+                question: "Es necesario que tú (levantarse)",
+                correct: "Te levantes",
                 level: "extreme"
             },
         ],
     },
     {
-        genre: "WHAT",
+        genre: "PRETERITE/IMPERFECT",
         questions: [
             {
-                question: "Who wrote Harry Potter?",
-                answers: ["JK Rowling", "JRR Tolkien"],
-                correct: "JK Rowling",
+                question: "Ayer,  yo (prender) la luz",
+                correct: "Prendí",
                 level: "easy",
             },
             {
-                question: "Who made the album Scorpion",
-                answers: ["Kanye West", "Drake"],
-                correct: "Drake",
+                question: "Cuando era niño, yo (jugar) baloncesto",
+                correct: "Jugaba",
                 level: "mid"
             },
             {
-                question: "Who developed the first car",
-                answers: ["Karl Benz", "Henry Ford"],
-                correct: "Karl Benz",
+                question: "Cuando  él corría, el ( caerse)",
+                correct: "Se cayó",
                 level: "medium"
             },
             {
-                question: "Who is the president",
-                answers: ["Obama", "Biden"],
-                correct: "Biden",
+                question: " El (estar)  comiendo, cuando sonó el telefono",
+                correct: "Estaba",
                 level: "hard"
             },
             {
-                question: "Who was the first president",
-                answers: ["Lincoln", "Washington"],
-                correct: "Washington",
+                question: "Cuando / él / estar /  niño / él carse / las escaleras",
+                correct: "Cuando él estaba niño él se cayó por las escaleras",
                 level: "extreme"
             },
         ],
     },
     {
-        genre: "WHERE",
+        genre: "COMMANDS",
         questions: [
             {
-                question: "Who wrote Harry Potter?",
-                answers: ["JK Rowling", "JRR Tolkien"],
-                correct: "JK Rowling",
+                question: "Put it (tú / I.O.)",
+                correct: "Ponle",
                 level: "easy",
             },
             {
-                question: "Who made the album Scorpion",
-                answers: ["Kanye West", "Drake"],
-                correct: "Drake",
+                question: "Por favor,  (Decirle) a Don Vinil",
+                correct: "Dígale",
                 level: "mid"
             },
             {
-                question: "Who developed the first car",
-                answers: ["Karl Benz", "Henry Ford"],
-                correct: "Karl Benz",
+                question: "Por favor, (Esctacionar) Allá",
+                correct: "Estacione",
                 level: "medium"
             },
             {
-                question: "Who is the president",
-                answers: ["Obama", "Biden"],
-                correct: "Biden",
+                question: "Do not tell him it (tú)",
+                correct: "No se lo digas",
                 level: "hard"
             },
             {
-                question: "Who was the first president",
-                answers: ["Lincoln", "Washington"],
-                correct: "Washington",
+                question: "Sir, please do not charge the computer here",
+                correct: "Señor, por favor no cargue la computadora aquí",
                 level: "extreme"
             },
         ],
     },
     {
-        genre: "WHEN",
+        genre: "VOCAB",
         questions: [
             {
-                question: "Who wrote Harry Potter?",
-                answers: ["JK Rowling", "JRR Tolkien"],
-                correct: "JK Rowling",
+                question: "Ankle",
+                correct: "Tobillo",
                 level: "easy",
             },
             {
-                question: "Who made the album Scorpion",
-                answers: ["Kanye West", "Drake"],
-                correct: "Drake",
+                question: "To sneeze",
+                correct: "Estornuda",
                 level: "mid"
             },
             {
-                question: "Who developed the first car",
-                answers: ["Karl Benz", "Henry Ford"],
-                correct: "Karl Benz",
+                question: "The medical Operation",
+                correct: "La operacion medica",
                 level: "medium"
             },
             {
-                question: "Who is the president",
-                answers: ["Obama", "Biden"],
-                correct: "Biden",
+                question: "Una cosa en que puedes llenar una batera",
+                correct: "Cargador",
                 level: "hard"
             },
             {
-                question: "Who was the first president",
-                answers: ["Lincoln", "Washington"],
-                correct: "Washington",
+                question: "I hurt my throat on the spoon",
+                correct: "Me Lastimé la garganta con la cuchara",
                 level: "extreme"
             },
         ],
     },
     {
-        genre: "WHY",
+        genre: "Tradúzcalo",
         questions: [
             {
-                question: "Who wrote Harry Potter?",
-                answers: ["JK Rowling", "JRR Tolkien"],
-                correct: "JK Rowling",
+                question: "I used to go every day, but now they told me not to",
+                correct: "Yo iba todos los días, pero ahora, ellos me dijeron no",
                 level: "easy",
             },
             {
-                question: "Who made the album Scorpion",
-                answers: ["Kanye West", "Drake"],
-                correct: "Drake",
+                question: "It is really important that you learn to take the patients temperature",
+                correct: "Es muy importante que aprendas tomar la temparaturea de los pacientes",
                 level: "mid"
             },
             {
-                question: "Who developed the first car",
-                answers: ["Karl Benz", "Henry Ford"],
-                correct: "Karl Benz",
+                question: "I would like that you park the car",
+                correct: "Quiero que tu estaciones el carro",
                 level: "medium"
             },
             {
-                question: "Who is the president",
-                answers: ["Obama", "Biden"],
-                correct: "Biden",
+                question: "Did you see what he did?",
+                correct: "Viste lo que el hizo",
                 level: "hard"
             },
             {
-                question: "Who was the first president",
+                question: "Es necesario que tú (levantarse)",
                 answers: ["Lincoln", "Washington"],
                 correct: "Washington",
                 level: "extreme"
@@ -180,19 +156,19 @@ const jeapordyCategories = [
 ]
 
 let currentTeam = 1;
-let scores = [0, 0, 0, 0, 0];
+let scores = [0, 0, 0, 0, 0, 0];
 
 function updateScore(points) {
     scores[currentTeam - 1] += points;
     document.getElementById(`score${currentTeam}`).textContent = scores[currentTeam - 1];
 
     // Move to the next team
-    currentTeam = currentTeam % 5 + 1;
+    currentTeam = currentTeam % 6 + 1;
 
     // Update the current team display
     const currentTeamDisplay = document.getElementById('current-team-display');
     if (currentTeamDisplay) {
-        currentTeamDisplay.textContent = `Current team: Team ${currentTeam}`;
+        currentTeamDisplay.textContent = `Team ${currentTeam}`;
     }
 }
 
@@ -253,8 +229,6 @@ function addCategory(category){
         }
 
         card.setAttribute('data-question', question.question)
-        card.setAttribute('data-answer-1', question.answers[0])
-        card.setAttribute('data-answer-2', question.answers[1])
         card.setAttribute('data-correct', question.correct)
         card.setAttribute('data-value', card.innerHTML)
 
@@ -292,6 +266,23 @@ function flipCard()
 
 }
 
+const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
+const doubleJeopardyText = document.getElementById('doubleJeopardyText');
+const closeDoubleJeopardy = document.getElementById('closeDoubleJeopardy');
+
+function showDoubleJeopardy() {
+    // Randomly select a team
+    const team = Math.floor(Math.random() * 6) + 1;
+    doubleJeopardyText.textContent = `This card will count for double points. Team ${team}, it's your turn to answer.`;
+    doubleJeopardyPopup.style.display = 'flex';
+}
+
+closeDoubleJeopardy.addEventListener('click', function() {
+    doubleJeopardyPopup.style.display = 'none';
+});
+
+
+
 function getResult(userAnswer) {
 
     const allCards = Array.from(document.querySelectorAll('.card'))
@@ -299,7 +290,7 @@ function getResult(userAnswer) {
     const cardOfButton = this.parentElement
 
     const thisTeam = currentTeam; // Store the current team
-    if (cardOfButton.getAttribute('data-correct') === userAnswer.toLowerCase()) {
+    if (cardOfButton.getAttribute('data-correct').toLowerCase() === userAnswer.toLowerCase()) {
         const points = parseInt(cardOfButton.getAttribute('data-value')); // Get the points from the card
         updateScore(points); // Update the score of the current team
         
