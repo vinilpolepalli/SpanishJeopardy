@@ -192,7 +192,14 @@ showInstructions();
 
 
 
+let doubleJeopardyCard = null;
 
+function assignDoubleJeopardy() {
+    const allCards = Array.from(document.querySelectorAll('.card'));
+    const randomIndex = Math.floor(Math.random() * allCards.length);
+    doubleJeopardyCard = allCards[randomIndex];
+    doubleJeopardyCard.classList.add('double-jeopardy');
+}
 
 
 function addCategory(category){
@@ -241,6 +248,9 @@ jeapordyCategories.forEach(category => addCategory(category))
 
 function flipCard()
 {
+    if (this === doubleJeopardyCard) {
+        showDoubleJeopardy();
+    }
     this.innerHTML = ""
     this.style.fontSize = "15px"
     this.style.lineHeight = "30px"
@@ -266,32 +276,24 @@ function flipCard()
 
 }
 
-const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
-const doubleJeopardyText = document.getElementById('doubleJeopardyText');
-const closeDoubleJeopardy = document.getElementById('closeDoubleJeopardy');
-
-function showDoubleJeopardy() {
-    // Randomly select a team
-    const team = Math.floor(Math.random() * 6) + 1;
-    doubleJeopardyText.textContent = `This card will count for double points. Team ${team}, it's your turn to answer.`;
-    doubleJeopardyPopup.style.display = 'flex';
-}
-
-closeDoubleJeopardy.addEventListener('click', function() {
-    doubleJeopardyPopup.style.display = 'none';
-});
 
 
 
 function getResult(userAnswer) {
+    const isDoubleJeopardy = this.parentElement === doubleJeopardyCard;
+    let points = parseInt(this.parentElement.getAttribute('data-value')); // Declare points with let, not const
 
     const allCards = Array.from(document.querySelectorAll('.card'))
     allCards.forEach(card => card.addEventListener('click', flipCard))
     const cardOfButton = this.parentElement
 
     const thisTeam = currentTeam; // Store the current team
+
+    if (isDoubleJeopardy) {
+        points *= 2; // Double the points if it's a double jeopardy card
+    }
+
     if (cardOfButton.getAttribute('data-correct').toLowerCase() === userAnswer.toLowerCase()) {
-        const points = parseInt(cardOfButton.getAttribute('data-value')); // Get the points from the card
         updateScore(points); // Update the score of the current team
         
         cardOfButton.classList.add('correct-answer')
@@ -306,8 +308,7 @@ function getResult(userAnswer) {
         
     }
     else {
-        
-        const points = -parseInt(cardOfButton.getAttribute('data-value')); // Get the negative points
+        points = -points; // Get the negative points
         updateScore(points); // Subtract the points from the team's score
         cardOfButton.classList.add('wrong-answer')
         cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
@@ -324,3 +325,4 @@ function getResult(userAnswer) {
     cardOfButton.removeEventListener('click', flipCard)
 }
 
+assignDoubleJeopardy();
