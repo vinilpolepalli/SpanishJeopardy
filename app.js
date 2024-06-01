@@ -400,9 +400,6 @@ const closeDoubleJeopardyPopup = document.getElementById('closeDoubleJeopardyPop
 
 // Add a click event listener to the close button
 closeDoubleJeopardyPopup.addEventListener('click', function() {
-    // Get the double jeopardy popup
-    const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
-
     // Hide the double jeopardy popup
     doubleJeopardyPopup.style.display = 'none';
 });
