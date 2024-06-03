@@ -2,7 +2,7 @@ Spanish Project for Señor Guzman's Spanish II Class at High Technology High Sch
 
 Creators: Vinil Polepalli & Charlie Aronson.
 
-To view the game. Download the code as a zip file and then open the index.html file. It should prompt you to Chrome/your preferred browser to play the game locally on your device.
+To view the game, click code. Download the code as a zip file and then open the index.html file. It should prompt you to Chrome/your preferred browser to play the game locally on your device.
 This game was made for our Spanish class, and there would be six teams, each having three people. 
 
 Here are the questions in case you would like to check them out:
