@@ -57,7 +57,7 @@ const jeapordyCategories = [
             },
             {
                 question: "Cuando / él / estar /  niño / él carse / las escaleras",
-                correct: "Cuando él estaba niño él se cayó por las escaleras",
+                correct: "Cuando él era niño él se cayó por las escaleras",
                 level: "extreme"
             },
         ],
@@ -107,7 +107,7 @@ const jeapordyCategories = [
             },
             {
                 question: "The medical Operation",
-                correct: "La operacion medica",
+                correct: "La operación médica",
                 level: "medium"
             },
             {
@@ -117,7 +117,7 @@ const jeapordyCategories = [
             },
             {
                 question: "I hurt my throat on the spoon",
-                correct: "Me Lastimé la garganta con la cuchara",
+                correct: "Yo me lastimé la garganta con la cuchara",
                 level: "extreme"
             },
         ],
@@ -132,23 +132,52 @@ const jeapordyCategories = [
             },
             {
                 question: "It is really important that you learn to take the patients temperature",
-                correct: "Es muy importante que aprendas tomar la temparaturea de los pacientes",
+                correct: "Es muy importante que tú aprendas tomar la temperatura de los pacientes",
                 level: "mid"
             },
             {
                 question: "I would like that you park the car",
-                correct: "Quiero que tu estaciones el carro",
+                correct: "Quiero que tú estaciones el carro",
                 level: "medium"
             },
             {
                 question: "Did you see what he did?",
-                correct: "Viste lo que el hizo",
+                correct: "Tú viste lo que él hizo",
                 level: "hard"
             },
             {
-                question: "Es necesario que tú (levantarse)",
-                answers: ["Lincoln", "Washington"],
-                correct: "Washington",
+                question: "He used to wake up ever day",
+                correct: "él se despertaba todos los días",
+                level: "extreme"
+            },
+        ],
+    },
+    {
+        genre: "Más Vocabulario",
+        questions: [
+            {
+                question: "To scan, To chat, To download",
+                correct: "Escanear, Chatear, Descargar",
+                level: "easy",
+            },
+            {
+                question: "La cosaen que puedes buscar por arachivaos,  un sitio web, o navegar el internet",
+                correct: "Computadora",
+                level: "mid"
+            },
+            {
+                question: "Con esto, puedes grabar videos, borrar videos, y ver los videos",
+                correct: "La cámara videoo",
+                level: "medium"
+            },
+            {
+                question: "Un otro nombre  para lavar el suelo, limpiar la casa, quitar la mesa, y quitar el polvo",
+                correct: "Los quehaceres domésticos",
+                level: "hard"
+            },
+            {
+                question: "Donde enctuentras una mesa,  una cuchara, un cuchillo,  y un tenedor",
+                correct: "El comedor",
                 level: "extreme"
             },
         ],
@@ -168,7 +197,7 @@ function updateScore(points) {
     // Update the current team display
     const currentTeamDisplay = document.getElementById('current-team-display');
     if (currentTeamDisplay) {
-        currentTeamDisplay.textContent = `Team ${currentTeam}`;
+        currentTeamDisplay.textContent = `Equipo ${currentTeam}`;
     }
 }
 
@@ -181,7 +210,7 @@ teamPopup.style.display = 'none';
 const teamButtons = document.getElementById('teamButtons');
 for (let i = 1; i <= 6; i++) {
     const teamButton = document.createElement('button');
-    teamButton.textContent = `Team ${i}`;
+    teamButton.textContent = `Equipo ${i}`;
     teamButton.addEventListener('click', function() {
         // Update the current team
         currentTeam = i;
@@ -189,7 +218,7 @@ for (let i = 1; i <= 6; i++) {
         // Update the current team display
         const currentTeamDisplay = document.getElementById('current-team-display');
         if (currentTeamDisplay) {
-            currentTeamDisplay.textContent = `Team ${currentTeam}`;
+            currentTeamDisplay.textContent = `Equipo ${currentTeam}`;
         }
 
         // Close the popup window
@@ -285,6 +314,15 @@ setRandomDoubleJeopardy();
 
 function flipCard()
 {
+    const doubleJeopardyPopup = document.getElementById('doubleJeopardyPopup');
+    const teamPopup = document.getElementById('teamPopup');
+
+    // If either popup is active, ignore the click event
+    if (doubleJeopardyPopup.style.display === 'block' || teamPopup.style.display === 'block') {
+        return;
+    }
+   
+
     this.innerHTML = ""
     this.style.fontSize = "15px"
     this.style.lineHeight = "30px"
@@ -299,7 +337,7 @@ function flipCard()
 
     const submitButton = document.createElement('button')
     submitButton.classList.add('submit-button')
-    submitButton.innerHTML = "Submit"
+    submitButton.innerHTML = "Entregar"
 
     submitButton.addEventListener('click', (event) => getResult.call(event.target, answerInput.value));
     this.append(textDisplay, answerInput, submitButton)
@@ -348,12 +386,12 @@ function getResult(userAnswer) {
         updateScore(points); // Update the score of the current team
         
         cardOfButton.classList.add('correct-answer')
-        cardOfButton.innerHTML = `+${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
+        cardOfButton.innerHTML = `+${points} Para El Equipo ${thisTeam}`; // Use thisTeam instead of currentTeam
         setTimeout(() => {
             while (cardOfButton.firstChild) {
                 cardOfButton.removeChild(cardOfButton.lastChild)
             }
-            cardOfButton.innerHTML = `+${points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
+            cardOfButton.innerHTML = `+${points} Para El Equipo ${thisTeam}`; // Use thisTeam instead of currentTeam
             
         },100)
         
@@ -364,28 +402,28 @@ function getResult(userAnswer) {
         cardOfButton.classList.add('wrong-answer')
     
         const correctAnswer = cardOfButton.getAttribute('data-correct');
-        cardOfButton.innerHTML = `${points} for Team ${thisTeam}. \nCorrect answer: ${correctAnswer}`; // Use thisTeam instead of currentTeam
+        cardOfButton.innerHTML = `${points} Para El Equipo ${thisTeam}. \nRespuesta correcta: ${correctAnswer}`; // Use thisTeam instead of currentTeam
     
         // Create override button
         
 
         const overrideButton = document.createElement('button');
-        overrideButton.textContent = 'Override';
+        overrideButton.textContent = 'Anular';
         overrideButton.classList.add('override-btn'); // Add class to override button
         overrideButton.addEventListener('click', function() {
             cardOfButton.classList.remove('wrong-answer');
             cardOfButton.classList.add('correct-answer');
             updateScoreWithoutChangingTurn(-points); // Add the points back to the team's score
-            cardOfButton.innerHTML = `+${-points} for Team ${thisTeam}`; // Use thisTeam instead of currentTeam
+            cardOfButton.innerHTML = `+${-points} Para El Equipo ${thisTeam}`; // Use thisTeam instead of currentTeam
             cardOfButton.removeEventListener('click', flipCard);
         });
     
         // Create continue button
         const continueButton = document.createElement('button');
-        continueButton.textContent = 'Continue';
+        continueButton.textContent = 'Continuar';
         continueButton.classList.add('continue-btn'); // Add class to continue button
         continueButton.addEventListener('click', function() {
-            cardOfButton.innerHTML = `${points} for Team ${thisTeam}`; // Display only the points lost and the team
+            cardOfButton.innerHTML = `${points} Para El Equipo ${thisTeam}`; // Display only the points lost and the team
             cardOfButton.removeEventListener('click', flipCard);
         });
 
