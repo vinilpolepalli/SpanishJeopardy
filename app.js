@@ -56,7 +56,7 @@ const jeapordyCategories = [
                 level: "hard"
             },
             {
-                question: "Cuando / él / estar /  niño / él carse / las escaleras",
+                question: "Cuando / él / ser /  niño / él carse / las escaleras",
                 correct: "Cuando él era niño él se cayó por las escaleras",
                 level: "extreme"
             },
