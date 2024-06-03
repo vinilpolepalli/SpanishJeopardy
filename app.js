@@ -102,7 +102,7 @@ const jeapordyCategories = [
             },
             {
                 question: "To sneeze",
-                correct: "Estornuda",
+                correct: "Estornudar",
                 level: "mid"
             },
             {
