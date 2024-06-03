@@ -111,7 +111,7 @@ const jeapordyCategories = [
                 level: "medium"
             },
             {
-                question: "Una cosa en que puedes llenar una batera",
+                question: "Una cosa en que puedes llenar una batería",
                 correct: "Cargador",
                 level: "hard"
             },
@@ -137,7 +137,7 @@ const jeapordyCategories = [
             },
             {
                 question: "I would like that you park the car",
-                correct: "Quiero que tú estaciones el carro",
+                correct: "Yo quiero que tú estaciones el carro",
                 level: "medium"
             },
             {
@@ -161,13 +161,13 @@ const jeapordyCategories = [
                 level: "easy",
             },
             {
-                question: "La cosaen que puedes buscar por arachivaos,  un sitio web, o navegar el internet",
+                question: "La cosa en que puedes buscar por arachivos,  un sitio web, o navegar el internet",
                 correct: "Computadora",
                 level: "mid"
             },
             {
                 question: "Con esto, puedes grabar videos, borrar videos, y ver los videos",
-                correct: "La cámara videoo",
+                correct: "La cámara video",
                 level: "medium"
             },
             {
